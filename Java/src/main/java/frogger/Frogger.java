@@ -13,19 +13,27 @@ public class Frogger {
     
     // Field for task 2. Anything to add/change?
     private final Records records;
-    private String firstName, lastName, phoneNumber, zipCode, state, gender;
+//    private String firstName, lastName, phoneNumber, zipCode, state, gender;
 
-    public Frogger(Road road, int position, Records records, String firstName, String lastName, String phoneNumber,
-    String zipCode, String state, String gender) {
+//    public Frogger(Road road, int position, Records records, String firstName, String lastName, String phoneNumber,
+//    String zipCode, String state, String gender) {
+//        this.road = road;
+//        this.position = position;
+//        this.records = records;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.phoneNumber = phoneNumber;
+//        this.zipCode = zipCode;
+//        this.state = state;
+//        this.gender = gender;
+//    }
+
+    // problem 1: Long parameter list: a long list of parameters provided to a method.
+    public Frogger(Road road, int position, FroggerID froggerID) {
         this.road = road;
         this.position = position;
-        this.records = records;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.zipCode = zipCode;
-        this.state = state;
-        this.gender = gender;
+        this.records = new Records();
+        recordMyself(froggerID);
     }
 
     /**
@@ -44,9 +52,14 @@ public class Frogger {
     }
 
     // TODO: Do you notice any issues here?
+//    public boolean isOccupied(int position) {
+//        boolean[] occupied = this.road.getOccupied();
+//        return occupied[position];
+//    }
+
+    // problem 2: Feature envy: a method accesses the data of another object more than its own data.
     public boolean isOccupied(int position) {
-        boolean[] occupied = this.road.getOccupied();
-        return occupied[position];
+        return this.road.isOccupied(position);
     }
     
     public boolean isValid(int position) {
@@ -57,12 +70,14 @@ public class Frogger {
 
     /**
      * Records Frogger to the list of records.
-     * 
-     * @return true if record successful, else false.
      */
-    public boolean recordMyself() {
-      boolean success = records.addRecord(firstName, lastName, phoneNumber, zipCode, state, gender);
-      return success;
+//    public boolean recordMyself() {
+//      boolean success = records.addRecord(firstName, lastName, phoneNumber, zipCode, state, gender);
+//      return success;
+//    }
+    public void recordMyself(FroggerID froggerID) {
+        records.addRecord(froggerID.firstName(), froggerID.lastName(), froggerID.phoneNumber(),
+                froggerID.zipCode(), froggerID.state(), froggerID.gender());
     }
 
 }
